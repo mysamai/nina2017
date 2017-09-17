@@ -1,0 +1,46 @@
+{
+  "name": "nina2017",
+  "version": "0.0.1",
+  "description": "Node Interactive North America 2017 interactive presentation slides",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server",
+    "clean": "shx rm -rf dist/ && shx mkdir -p dist",
+    "styles": "lessc styles/styles.less > dist/styles.css",
+    "build": "npm run clean && npm run styles && npm run webpack",
+    "build:production": "NODE_ENV=production npm run webpack",
+    "webpack": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mysamai/nina2017.git"
+  },
+  "author": "David Luecke <daff@neyeon.com>",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/mysamai/nina2017/issues"
+  },
+  "homepage": "https://github.com/mysamai/nina2017#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "less": "^2.7.2",
+    "shx": "^0.2.2",
+    "uglify-js": "^3.1.0",
+    "uglifyjs-webpack-plugin": "^0.4.6",
+    "webpack": "^3.6.0",
+    "webpack-dev-server": "^2.8.2",
+    "webpack-merge": "^4.1.0"
+  },
+  "dependencies": {
+    "mobx-react": "^4.2.2",
+    "mysam-ui": "git+https://github.com/mysamai/mysam-ui.git",
+    "natural": "^0.5.4",
+    "react": "^15.6.1",
+    "react-highlight": "^0.10.0"
+  }
+}
