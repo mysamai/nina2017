@@ -3141,34 +3141,24 @@ footer {
 .logo {
   width: 300px;
 }
-.about img {
-  height: 250px;
-  width: 250px;
-  border-radius: 50%;
-  border: 5px solid #CCCCCC;
-}
 pre {
+  width: 75%;
+  margin: 0 auto;
+  font-size: 1.5em;
   text-align: left;
 }
-/*
-
-github.com style (c) Vasily Polovnyov <vast@whiteants.net>
-
-*/
 .hljs {
   display: block;
-  overflow-x: auto;
   padding: 0.5em;
 }
 .hljs-comment,
 .hljs-quote {
-  color: #998;
+  color: #818181;
   font-style: italic;
 }
 .hljs-keyword,
 .hljs-selector-tag,
 .hljs-subst {
-  color: #333;
   font-weight: bold;
 }
 .hljs-number,
@@ -3176,11 +3166,11 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 .hljs-variable,
 .hljs-template-variable,
 .hljs-tag .hljs-attr {
-  color: #008080;
+  color: #35344a;
 }
 .hljs-string,
 .hljs-doctag {
-  color: #d14;
+  color: #d456b1;
 }
 .hljs-title,
 .hljs-section,
@@ -3210,10 +3200,6 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 .hljs-bullet {
   color: #990073;
 }
-.hljs-built_in,
-.hljs-builtin-name {
-  color: #0086b3;
-}
 .hljs-meta {
   color: #999;
   font-weight: bold;
@@ -3229,4 +3215,10 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 }
 .hljs-strong {
   font-weight: bold;
+}
+.about img {
+  height: 250px;
+  width: 250px;
+  border-radius: 50%;
+  border: 5px solid #CCCCCC;
 }

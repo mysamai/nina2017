@@ -3,16 +3,23 @@ import * as slides from './slides';
 
 export default function (sam) {
   const order = [
+    'classify',
+    'train',
+    'featurize',
+    'combine',
+    'stem',
+    'tokenize',
     'speechRecognition',
     'splash',
     'about',
     'iceland'
   ];
 
-  let currentSlide = 0;
+  let currentSlide = -1;
 
   const showSlide = offset => {
     const content = document.getElementById('content');
+    const oldSlide = currentSlide;
 
     content.className = content.className.replace(' home', '');
 
@@ -24,6 +31,10 @@ export default function (sam) {
       currentSlide = 0;
     }
 
+    if(currentSlide === oldSlide) {
+      return;
+    }
+
     const slideName = order[currentSlide];
     const Slide = slides[slideName];
 
@@ -33,6 +44,12 @@ export default function (sam) {
   };
 
   window.document.addEventListener('keydown', event => {
+    const tag = event.target.tagName.toLowerCase();
+
+    if(tag === 'input' || tag === 'textarea') {
+      return;
+    }
+    
     if(event.code === 'ArrowRight') {
       showSlide('next');
     } else if(event.code === 'ArrowLeft') {
