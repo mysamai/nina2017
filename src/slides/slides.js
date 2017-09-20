@@ -178,29 +178,65 @@ net.train([${inputs.join(',\n')}
 }
 
 export function classify() {
+  const r = new Recognizer();
   const net = new brain.NeuralNetwork();
+  const trainings = features.stems.map((tokens, index) => {
+    const label = index % 2 ? 'bad' : 'good';
+    return {
+      input: features.featurize(tokens),
+      output: { [label]: 1 }
+    };
+  });
 
-  net.train([
-    // ["i","like","lasagna"]
-    { input: [1,1,1,0,0,0,0,0,0,0], output: { good: 1 } },
-
-    // ["peopl","don","t","like","jira"]
-    { input: [0,1,0,1,1,1,1,0,0,0], output: { bad: 1 } },
-
-    // ["i","love","ic","cream"]
-    { input: [1,0,0,0,0,0,0,1,1,1], output: { good: 1 } }
-  ]);
-
-  console.log(net.run([1,0,0,0,0,0,0,1,1,1]));
+  net.train(trainings);
 
   const Slide = observer(() => {
+    const { text = '' } = r.transcript;
+    const stemmed = Featurizer.stem(text);
+    const featurized = features.featurize(stemmed);
+
     return <div className='padded'>
       <h1>Classify</h1>
+      <RecognizerForm recognizer={r} />
       <Highlight className="js">{
-JSON.stringify(net.run([1,0,0,0,0,0,0,1,1,1]), null, '  ')
+`// ${JSON.stringify(features.combined)}
+// ${JSON.stringify(stemmed)}
+
+net.run(${JSON.stringify(featurized)})
+
+${JSON.stringify(net.run(featurized), null, '  ')}`
       }</Highlight>
     </div>;
   });
 
   return <Slide />;
+}
+
+export function summary() {
+  return <div className='padded'>
+    <ul>
+      <li>You don't need always need huge datasets for machine learning</li>
+    </ul>
+  </div>;
+}
+
+export function coc() {
+  return <div className='padded'>
+    <h2><i>
+      "Software that learns doesn't break, it makes mistakes
+    </i></h2>
+
+    <img src='assets/slacklog.png' alt='Sadly the Robot assistant did not read the CoC :p' />
+  </div>;
+}
+
+export function conclusion() {
+  return <div className='padded'>
+    <ul>
+      <li>Can we make Machine Learning more accessible?</li>
+      <li>How will we relate to technology that learns?</li>
+      <li>What is its User Experience?</li>
+      <li>What does it mean when data becomes the technology?</li>
+    </ul>
+  </div>;
 }

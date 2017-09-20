@@ -14,7 +14,7 @@ export default class Featurizer {
     extendObservable(this, {
       sentences: [
         'I like lasagna',
-        'People don\'t like JIRA'
+        'I don\'t like JIRA'
       ]
     });
   }
@@ -37,7 +37,10 @@ export default class Featurizer {
     );
   }
 
-  featurize(tokens) {
+  featurize(content) {
+    const tokens = typeof content === 'string'
+      ? stem(content) : content;
+
     return this.combined.map(current =>
       tokens.indexOf(current) === -1 ? 0 : 1
     );

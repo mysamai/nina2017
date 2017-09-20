@@ -3,16 +3,19 @@ import * as slides from './slides';
 
 export default function (sam) {
   const order = [
-    'classify',
-    'train',
-    'featurize',
-    'combine',
-    'stem',
-    'tokenize',
-    'speechRecognition',
     'splash',
     'about',
-    'iceland'
+    'iceland',
+    'speechRecognition',
+    'tokenize',
+    'stem',
+    'combine',
+    'featurize',
+    'train',
+    'classify',
+    'summary',
+    'coc',
+    'conclusion'
   ];
 
   let currentSlide = -1;
