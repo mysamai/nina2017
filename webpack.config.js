@@ -34,7 +34,7 @@ const dev = {
 const production = {
   devtool: 'cheap-module-source-map',
   output: {
-    filename: path.join('dist', 'nina.min.js')
+    filename: path.join('dist', 'nina.js')
   },
   plugins: [
     new UglifyJSPlugin({
