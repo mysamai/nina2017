@@ -2957,7 +2957,19 @@ h6 {
 .icon-mysam-icon:before {
   content: "\e902";
 }
-.icon-base {
+.round-button {
+  font-size: 1em;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+.round-button.small {
+  width: 40px;
+  height: 40px;
+  font-size: 0.7em;
+}
+.icon-base,
+.round-button {
   background-color: #35344a;
   border-radius: 50%;
   width: 50px;
@@ -2966,10 +2978,12 @@ h6 {
   text-align: center;
   position: relative;
 }
-.icon-base:before {
+.icon-base:before,
+.round-button:before {
   font-size: 270%;
 }
-.icon-base.icon-animated img {
+.icon-base.icon-animated img,
+.round-button.icon-animated img {
   max-width: 70%;
 }
 .text-button,
@@ -3022,13 +3036,6 @@ select {
   font-size: 1em;
 }
 select:focus {
-  outline: none;
-}
-button.fa {
-  border: none;
-  margin-top: 20px;
-  font-size: 2em;
-  background: none;
   outline: none;
 }
 textarea:focus,
@@ -3113,11 +3120,15 @@ header small {
   font-size: 0.6em;
   color: #CCCCCC;
   text-shadow: none;
-  padding-right: 10px;
+  line-height: 50px;
 }
-header .fa {
-  width: 36px;
-  text-align: center;
+header button {
+  display: inline-block;
+  float: right;
+  margin-left: 10px;
+}
+header button.small {
+  margin-top: 5px;
 }
 footer {
   background-color: #e9485e;
@@ -3142,7 +3153,7 @@ footer {
   width: 300px;
 }
 pre {
-  width: 75%;
+  display: inline-block;
   margin: 0 auto;
   font-size: 1.5em;
   text-align: left;
@@ -3216,9 +3227,35 @@ pre {
 .hljs-strong {
   font-weight: bold;
 }
-.about img {
-  height: 250px;
-  width: 250px;
+li,
+p {
+  font-size: 1.5em;
+  margin-bottom: 20px;
+}
+.splash h1 {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 4em;
+}
+.about h1 {
+  margin-top: 0;
+}
+.about img.profile {
+  height: 220px;
+  width: 220px;
   border-radius: 50%;
   border: 5px solid #CCCCCC;
+}
+.about h2 a:first-child {
+  margin-right: 20px;
+}
+.link a {
+  font-size: 4em;
+}
+.iceland iframe {
+  width: 100%;
+  height: 95vh;
+  margin-top: 5vh;
+}
+.conclusion a {
+  margin-right: 20px;
 }

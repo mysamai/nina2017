@@ -1,66 +1,87 @@
 import React from 'react';
 import * as slides from './slides';
 
+const slideOrder = [
+  'splash',
+  'about',
+  'link',
+  'iceland',
+  'speechRecognition',
+  'brainjs',
+  'tokenize',
+  'stem',
+  'combine',
+  'featurize',
+  'train',
+  'classify',
+  'naturalBrain',
+  'mysam',
+  'summary',
+  'coc',
+  'conclusion'
+];
+
 export default function (sam) {
-  const order = [
-    'splash',
-    'about',
-    'iceland',
-    'speechRecognition',
-    'tokenize',
-    'stem',
-    'combine',
-    'featurize',
-    'train',
-    'classify',
-    'summary',
-    'coc',
-    'conclusion'
-  ];
-
-  let currentSlide = -1;
-
-  const showSlide = offset => {
-    const content = document.getElementById('content');
-    const oldSlide = currentSlide;
-
-    content.className = content.className.replace(' home', '');
-
-    if(offset === 'previous') {
-      currentSlide = Math.max(currentSlide - 1, 0);
-    } else if(offset === 'next') {
-      currentSlide = Math.min(currentSlide + 1, order.length - 1);
-    } else {
-      currentSlide = 0;
-    }
-
-    if(currentSlide === oldSlide) {
-      return;
-    }
-
-    const slideName = order[currentSlide];
-    const Slide = slides[slideName];
-
-    sam.render(<div className={`slide ${slideName}`}>
-      <Slide />
-    </div>, sam.element);
-  };
+  let currentSlide = 0;
 
   window.document.addEventListener('keydown', event => {
     const tag = event.target.tagName.toLowerCase();
+    const oldSlide = currentSlide;
 
     if(tag === 'input' || tag === 'textarea') {
       return;
     }
     
     if(event.code === 'ArrowRight') {
-      showSlide('next');
+      currentSlide = Math.min(slideOrder.length - 1, currentSlide + 1);
     } else if(event.code === 'ArrowLeft') {
-      showSlide('previous');
+      currentSlide = Math.max(0, currentSlide - 1);
+    }
+
+    if(currentSlide !== oldSlide) {
+      sam.runAction('slides', {
+        action: {
+          slide: slideOrder[currentSlide]
+        }
+      });
     }
   });
 
-  sam.action('slides', (el, classification) => {
-    showSlide();
+  sam.learn('slides', {
+    description: 'Show slide',
+    form (classification = {}) {
+      const action = classification.action || {};
+
+      return <select className='slide' defaultValue={action.slide}>
+        {slideOrder.map(name =>
+          <option value={name} key={name}>{name}</option>
+        )}
+      </select>;
+    },
+    onSubmit (form) {
+      return {
+        slide: form.querySelector('.slide').value
+      };
+    }
+  });
+
+  sam.action('slides', (el, classification = {}) => {
+    const action = (classification && classification.action) || {};
+    const { slide = 'splash' } = action;
+    const Slide = slides[slide];
+    const content = document.getElementById('content');
+
+    if(slide === 'splash') {
+      content.className += ' home';
+    }
+
+    const teardown = sam.render(<div className={`slide ${slide}`}>
+      <Slide />
+    </div>, sam.element);
+
+    return function() {
+      content.className = content.className.replace(' home', '');
+      teardown();
+    }
   });
 }
