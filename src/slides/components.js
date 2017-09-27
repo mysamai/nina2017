@@ -20,28 +20,11 @@ class RecognizerButtonComponent extends React.Component {
 }
 
 class RecognizerFormComponent extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { text: '' };
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const { text = '' } = nextProps.recognizer.transcript;
-
-    this.setState({ text });
-  }
-
-  updateText(ev) {
-    const text = ev.target.value;
-
-    this.setState({ text });
-  }
-
   submit(ev) {
-    const { onSubmit } = this.props;
+    const { onSubmit, recognizer } = this.props;
     const text = ev.target.querySelector('input').value;
 
-    this.props.recognizer.transcript = {
+    recognizer.transcript = {
       text, confidence: 1
     }
 
@@ -52,13 +35,19 @@ class RecognizerFormComponent extends React.Component {
     ev.preventDefault();
   }
 
+  componentDidUpdate() {
+    const { text } = this.props.recognizer.transcript;
+
+    if(text) {
+      this.input.value = text;
+    }
+  }
+
   render() {
     const { recognizer, showSubmit } = this.props;
-    const { text = '' } = recognizer.transcript;
 
     return <form onSubmit={this.submit.bind(this)} className='recognizer'>
-      <input type='text' value={this.state.text} onChange={this.updateText.bind(this)} />
-      <input type='hidden' value={text} />
+      <input type='text' ref={input => { this.input = input; }} defaultValue={recognizer.transcript.text} />
       <RecognizerButton recognizer={recognizer} />
       {showSubmit ? <button style={{ marginLeft: '10px' }} className='icon-base icon-checkmark' type='submit' /> : null}
     </form>;

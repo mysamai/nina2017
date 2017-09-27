@@ -54,7 +54,10 @@ export function speechRecognition() {
 
   const Slide = observer(() => <div className='padded'>
     <h1>HTML5 can hear  you</h1>
-    <RecognizerForm recognizer={r} />
+    <div>
+      <p>{r.transcript.text || <br />}</p>
+      <RecognizerButton recognizer={r} />
+    </div>
     <Highlight className='js'>{
 `var recognition = new webkitSpeechRecognition();
 recognition.onresult = function(event) {
@@ -108,8 +111,7 @@ export function tokenize() {
       <h1>Tokenize</h1>
       <RecognizerForm recognizer={r} />
       <Highlight className='js'>{
-`const tokens = new Tokenizer().tokenize('${text.toLowerCase()}');
-
+`// ${text.toLowerCase()}
 ${JSON.stringify(tokenized)}`
       }</Highlight>
     </div>;
@@ -129,7 +131,6 @@ export function stem() {
 
     return <div className='padded'>
       <h1>Stem</h1>
-      <p>Create the word stem for each token</p>
       <RecognizerForm recognizer={r} />
       <Highlight className='js'>{
 `// All word stems
@@ -156,8 +157,7 @@ ${JSON.stringify(Featurizer.stem(current))}
 
     return <div className='padded'>
       <h1>Combine tokens</h1>
-      <RecognizerForm recognizer={r} showSubmit
-        onSubmit={text => sentences.push(text)} />
+      <RecognizerForm recognizer={r} onSubmit={text => sentences.push(text)} showSubmit />
       <Highlight className='js'>{
 `${stemmedSentences}
 // Combined tokens
@@ -287,22 +287,18 @@ export function mysam() {
   </div>
 }
 
-export function summary() {
+export function lessons() {
   return <div className='padded'>
     <h2><i>
       You don't always need huge datasets to build something useful
     </i></h2>
-    <ul>
-      <li>HTML5 speech recognition works quite well</li>
-      <li>Neural networks are great for natural language processing</li>
-    </ul>
   </div>;
 }
 
 export function coc() {
   return <div className='padded'>
     <h2><i>
-      "Software that learns doesn't break, it makes mistakes"
+      Software that learns doesn't break, it makes mistakes
     </i></h2>
 
     <img src='assets/slacklog.png' alt='Sadly the Robot assistant did not read the CoC :p' />

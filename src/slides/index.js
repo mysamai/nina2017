@@ -16,7 +16,7 @@ const slideOrder = [
   'classify',
   'naturalBrain',
   'mysam',
-  'summary',
+  'lessons',
   'coc',
   'conclusion'
 ];
