@@ -24,17 +24,12 @@ const slideOrder = [
 export default function (sam) {
   let currentSlide = 0;
 
-  window.document.addEventListener('keydown', event => {
-    const tag = event.target.tagName.toLowerCase();
+  const updateSlide = direction => {
     const oldSlide = currentSlide;
 
-    if(tag === 'input' || tag === 'textarea') {
-      return;
-    }
-    
-    if(event.code === 'ArrowRight') {
+    if(direction === 'next') {
       currentSlide = Math.min(slideOrder.length - 1, currentSlide + 1);
-    } else if(event.code === 'ArrowLeft') {
+    } else if(direction === 'previous') {
       currentSlide = Math.max(0, currentSlide - 1);
     }
 
@@ -45,6 +40,35 @@ export default function (sam) {
         }
       });
     }
+  }
+
+  if(typeof window.io !== 'undefined') {
+    const socket = io('http://localhost:8899');
+
+    socket.on('flic-action created', data => {
+      switch(data.type) {
+        case 'click':
+          sam.activeRecognizer.toggle();
+          break;
+        case 'doubleclick':
+          updateSlide('next');
+          break;
+      }
+    });
+  }
+
+  window.document.addEventListener('keydown', event => {
+    const tag = event.target.tagName.toLowerCase();
+
+    if(tag === 'input' || tag === 'textarea') {
+      return;
+    }
+    
+    if(event.code === 'ArrowRight') {
+      updateSlide('next');
+    } else if(event.code === 'ArrowLeft') {
+      updateSlide('previous');
+    }
   });
 
   sam.learn('slides', {
@@ -52,11 +76,13 @@ export default function (sam) {
     form (classification = {}) {
       const action = classification.action || {};
 
-      return <select className='slide' defaultValue={action.slide}>
-        {slideOrder.map(name =>
-          <option value={name} key={name}>{name}</option>
-        )}
-      </select>;
+      return <div>
+        <select className='slide' defaultValue={action.slide}>
+          {slideOrder.map(name =>
+            <option value={name} key={name}>{name}</option>
+          )}
+        </select>
+      </div>;
     },
     onSubmit (form) {
       return {
@@ -70,13 +96,20 @@ export default function (sam) {
     const { slide = 'splash' } = action;
     const Slide = slides[slide];
     const content = document.getElementById('content');
+    const setRecognizer = recognizer => {
+      sam.activeRecognizer = recognizer;
+      return recognizer;
+    }
+
+    currentSlide = slideOrder.indexOf(slide);
+    sam.activeRecognizer = sam.recognizer;
 
     if(slide === 'splash') {
       content.className += ' home';
     }
 
     const teardown = sam.render(<div className={`slide ${slide}`}>
-      <Slide />
+      <Slide {... { sam, classification, setRecognizer }} />
     </div>, sam.element);
 
     return function() {

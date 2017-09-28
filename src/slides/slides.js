@@ -43,14 +43,14 @@ export function link() {
 }
 
 export function iceland() {
-  return <iframe src='https://www.youtube.com/embed/C1Hld-ONeFA?start=488&end=518&autoplay=1' frameBorder='0' allowFullScreen></iframe>;
+  return <iframe src='https://www.youtube.com/embed/C1Hld-ONeFA?start=488&end=510&autoplay=1' frameBorder='0' allowFullScreen></iframe>;
 }
 
-export function speechRecognition() {
-  const r = new Recognizer({
+export function speechRecognition({ setRecognizer }) {
+  const r = setRecognizer(new Recognizer({
     continuous: true,
     interimResults: true
-  });
+  }));
 
   const Slide = observer(() => <div className='padded'>
     <h1>HTML5 can hear  you</h1>
@@ -76,9 +76,12 @@ export function brainjs() {
 
   // [ R, G, B ]
   net.train([
-    { input: [ 0.03, 0.7, 0.5 ], output: { dark: 1 } },
-    { input: [ 0.16, 0.09, 0.2 ], output: { light: 1 } },
-    { input: [ 0.5, 0.5, 1.0 ], output: { dark: 1 } }
+    // Red (255, 0, 0)
+    { input: [ 1, 0, 0 ], output: { light: 1 } },
+    // Yellow (255, 255, 0)
+    { input: [ 1, 1, 0 ], output: { dark: 1 } },
+    // Dark grey (51, 51, 51)
+    { input: [ 0.2, 0.2, 0.2 ], output: { light: 1 } }
   ]);
 
   return <div className='padded'>
@@ -89,19 +92,23 @@ const net = new brain.NeuralNetwork();
 
 // [ R, G, B ]
 net.train([
-  { input: [ 0.03, 0.7, 0.5 ], output: { dark: 1 } },
-  { input: [ 0.16, 0.09, 0.2 ], output: { light: 1 } },
-  { input: [ 0.5, 0.5, 1.0 ], output: { dark: 1 } }
+  // Red (255, 0, 0)
+  { input: [ 1, 0, 0 ], output: { light: 1 } },
+  // Yellow (255, 255, 0)
+  { input: [ 1, 1, 0 ], output: { dark: 1 } },
+  // Dark grey (51, 51, 51)
+  { input: [ 0.2, 0.2, 0.2 ], output: { light: 1 } }
 ]);
 
-var output = net.run([1, 0.4, 0 ]);
-// ${JSON.stringify(net.run([1, 0.4, 0 ]))}`
+// Dark Blue (0, 0, 128)
+net.run([ 0, 0, 0.5 ]);
+// ${JSON.stringify(net.run([ 0, 0, 0.5 ]))}`
     }</Highlight>
   </div>;
 }
 
-export function tokenize() {
-  const r = new Recognizer();
+export function tokenize({ setRecognizer }) {
+  const r = setRecognizer(new Recognizer());
   const Slide = observer(() => {
     const { text = '' } = r.transcript;
 
@@ -120,8 +127,8 @@ ${JSON.stringify(tokenized)}`
   return <Slide />;
 }
 
-export function stem() {
-  const r = new Recognizer();
+export function stem({ setRecognizer }) {
+  const r = setRecognizer(new Recognizer());
   const Slide = observer(() => {
     const { text = '' } = r.transcript;
     const sentence = text.toLowerCase();
@@ -145,8 +152,8 @@ ${JSON.stringify(stemmed)}`
   return <Slide />;
 }
 
-export function combine() {
-  const r = new Recognizer();
+export function combine({ setRecognizer }) {
+  const r = setRecognizer(new Recognizer());
   const { sentences } = features;
 
   const Slide = observer(() => {
@@ -218,8 +225,8 @@ net.train([${inputs.join(',\n')}
   return <Slide />
 }
 
-export function classify() {
-  const r = new Recognizer();
+export function classify({ setRecognizer }) {
+  const r = setRecognizer(new Recognizer());
   const net = new brain.NeuralNetwork();
   const trainings = features.stems.map((tokens, index) => {
     const label = index % 2 ? 'bad' : 'good';
@@ -290,7 +297,7 @@ export function mysam() {
 export function lessons() {
   return <div className='padded'>
     <h2><i>
-      You don't always need huge datasets to build something useful
+      "You don't always need huge datasets to build something useful"
     </i></h2>
   </div>;
 }

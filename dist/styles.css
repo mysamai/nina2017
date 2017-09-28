@@ -3227,6 +3227,10 @@ pre {
 .hljs-strong {
   font-weight: bold;
 }
+header {
+  overflow: auto;
+  height: auto;
+}
 li,
 p {
   font-size: 1.5em;
@@ -3253,8 +3257,8 @@ p {
 }
 .iceland iframe {
   width: 100%;
-  height: 95vh;
-  margin-top: 5vh;
+  height: 90vh;
+  margin-top: 60px;
 }
 .conclusion a {
   margin-right: 20px;
