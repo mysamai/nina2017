@@ -43,7 +43,7 @@ export function link() {
 }
 
 export function iceland() {
-  return <iframe src='https://www.youtube.com/embed/C1Hld-ONeFA?start=488&end=510&autoplay=1' frameBorder='0' allowFullScreen></iframe>;
+  return <iframe src='https://www.youtube.com/embed/C1Hld-ONeFA?start=488&end=515&autoplay=1' frameBorder='0' allowFullScreen></iframe>;
 }
 
 export function speechRecognition({ setRecognizer }) {

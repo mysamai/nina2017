@@ -42,20 +42,22 @@ export default function (sam) {
     }
   }
 
-  if(typeof window.io !== 'undefined') {
-    const socket = io('http://localhost:8899');
+  const socket = io('http://localhost:8899', {
+    transports: [ 'websocket' ],
+    reconnectionAttempts: 2,
+    timeout: 1000
+  });
 
-    socket.on('flic-action created', data => {
-      switch(data.type) {
-        case 'click':
-          sam.activeRecognizer.toggle();
-          break;
-        case 'doubleclick':
-          updateSlide('next');
-          break;
-      }
-    });
-  }
+  socket.on('flic-action created', data => {
+    switch(data.type) {
+      case 'click':
+        sam.activeRecognizer.toggle();
+        break;
+      case 'doubleclick':
+        updateSlide('next');
+        break;
+    }
+  });
 
   window.document.addEventListener('keydown', event => {
     const tag = event.target.tagName.toLowerCase();
