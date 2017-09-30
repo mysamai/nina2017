@@ -1,4 +1,4 @@
-import mysam from 'mysam';
+import mysam from 'mysam/browser';
 import ui from 'mysam-ui';
 import slides from './slides';
 
