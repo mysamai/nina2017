@@ -85,7 +85,7 @@ export function brainjs() {
   ]);
 
   return <div className='padded'>
-    <h1>Neural Networks in JavaScript</h1>
+    <h1><a href='https://github.com/BrainJS/brain.js'>Neural Networks</a> in JavaScript</h1>
     <Highlight className='js'>{
 `const brain = require('brain.js');
 const net = new brain.NeuralNetwork();
@@ -263,7 +263,7 @@ ${JSON.stringify(net.run(featurized), null, '  ')}`
 export function naturalBrain() {
   return <div className='padded'>
     <h1>natural-brain</h1>
-    <p>A node-natural classifier using a brain.js neural network:</p>
+    <p>A <a href='https://github.com/NaturalNode/natural'>NaturalNode</a> classifier using a brain.js neural network:</p>
     <Highlight className='js'>{
 `const classifier = new require('natural-brain').BrainJSClassifier();
 
@@ -284,7 +284,7 @@ console.log(classifier.classify('Can you play some stuff?')); // -> music`
 export function mysam() {
   return <div className='padded'>
     <h1>MySam</h1>
-    <p>A trainable natural language processing API and extensible UI to create your own web-based digital assistant.</p>
+    <p>A trainable natural language processing API and UI to create your own web-based digital assistant.</p>
     <p><a href='https://mysamai.com'>
       <img src='assets/mysam-logo.png' alt='MySam logo' />
     </a></p>
@@ -299,13 +299,16 @@ export function lessons() {
     <h2><i>
       "You don't always need huge datasets to build something useful"
     </i></h2>
+    <h2><i>
+      "Software that learns is different..."
+    </i></h2>
   </div>;
 }
 
 export function coc() {
   return <div className='padded'>
     <h2><i>
-      Software that learns doesn't break, it makes mistakes
+      "Software that learns doesn't break, it makes mistakes"
     </i></h2>
 
     <img src='assets/slacklog.png' alt='Sadly the Robot assistant did not read the CoC :p' />
