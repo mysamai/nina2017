@@ -331,31 +331,6 @@ export function conclusion() {
           <i className='fa fa-github' /> mysamai
         </a>
       </li>
-      <li>
-        <a href='http://superscriptjs.com/'>
-          SuperScriptJS
-        </a>
-        <a href='https://github.com/NaturalNode/natural'>
-          node-natural
-        </a>
-        <a href='https://github.com/mysamai/natural-brain'>
-          natural-brain
-        </a>
-        <a href='https://github.com/brainjs'>
-          brain.js
-        </a>
-      </li>
-      <li>
-        <a href='https://openai.com/'>
-          OpenAI
-        </a>
-        <a href='https://jasperproject.github.io/'>
-          Jasper
-        </a>
-        <a href='http://sirius.clarity-lab.org/'>
-          Sirius
-        </a>
-      </li>
     </ul>
   </div>;
 }
