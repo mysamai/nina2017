@@ -41,7 +41,7 @@
     "lodash": "^4.17.4",
     "mobx-react": "^4.2.2",
     "mysam": "^0.2.0-pre.1",
-    "mysam-ui": "0.0.1",
+    "mysam-ui": "0.0.3",
     "natural": "^0.5.4",
     "react": "^15.0.0",
     "react-dom": "^15.0.0",
