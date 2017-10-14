@@ -61,8 +61,8 @@ export default function (sam) {
 
   window.document.addEventListener('keydown', event => {
     const tag = event.target.tagName.toLowerCase();
-
-    if(tag === 'input' || tag === 'textarea') {
+    
+    if(tag === 'input' || tag === 'textarea' || sam.navigate === false) {
       return;
     }
     
