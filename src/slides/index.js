@@ -42,27 +42,27 @@ export default function (sam) {
     }
   }
 
-  const socket = io('http://localhost:8899', {
-    transports: [ 'websocket' ],
-    reconnectionAttempts: 2,
-    timeout: 1000
-  });
+  // const socket = io('http://localhost:8899', {
+  //   transports: [ 'websocket' ],
+  //   reconnectionAttempts: 2,
+  //   timeout: 1000
+  // });
 
-  socket.on('flic-action created', data => {
-    switch(data.type) {
-      case 'click':
-        sam.activeRecognizer.toggle();
-        break;
-      case 'doubleclick':
-        updateSlide('next');
-        break;
-    }
-  });
+  // socket.on('flic-action created', data => {
+  //   switch(data.type) {
+  //     case 'click':
+  //       sam.activeRecognizer.toggle();
+  //       break;
+  //     case 'doubleclick':
+  //       updateSlide('next');
+  //       break;
+  //   }
+  // });
 
   window.document.addEventListener('keydown', event => {
     const tag = event.target.tagName.toLowerCase();
     
-    if(tag === 'input' || tag === 'textarea' || sam.navigate === false) {
+    if(tag === 'input' || tag === 'textarea' || sam.embedded === false) {
       return;
     }
     
@@ -119,4 +119,13 @@ export default function (sam) {
       teardown();
     }
   });
+
+  sam.embed = function(slideName) {
+    this.embedded = true;
+    document.getElementsByTagName('header')[0].children[0].style.display = 'none';
+    
+    sam.runAction('slides', {
+      action: { slide: slideName }
+    });
+  }
 }
