@@ -122,10 +122,13 @@ export default function (sam) {
 
   sam.embed = function(slideName) {
     this.embedded = true;
-    document.getElementsByTagName('header')[0].children[0].style.display = 'none';
     
     sam.runAction('slides', {
       action: { slide: slideName }
+    });
+
+    document.querySelectorAll('header div, h1').forEach(el => {
+      el.style.display = 'none';
     });
   }
 }
