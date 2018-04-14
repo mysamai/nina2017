@@ -8,7 +8,8 @@
     "start": "webpack-dev-server",
     "clean": "node_modules/.bin/shx rm -rf dist/ && node_modules.bin/shx mkdir -p dist",
     "styles": "node_modules/.bin/lessc styles/styles.less > dist/styles.css",
-    "build": "npm run clean && npm run styles && npm run webpack",
+    "build": "echo \"skipping build script for now\"",
+    "build:all": "npm run clean && npm run styles && npm run webpack",
     "build:production": "NODE_ENV=production npm run webpack",
     "webpack": "node_modules/.bin/webpack"
   },
