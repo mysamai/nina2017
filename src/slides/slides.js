@@ -13,9 +13,12 @@ import { RecognizerButton, RecognizerForm } from './components';
 const features = new Featurizer();
 
 export function splash() {
-  return <h1 className='animated fadeIn'>
-    When AI makes mistakes
-  </h1>;
+  return <div>
+    <h1 className='animated fadeIn'>
+      Natural Language Processing and Machine Learning In The Browser
+    </h1>
+    <h2>By <a href="https://twitter.com/daffl">@daffl</a></h2>
+  </div>;
 }
 
 export function about() {

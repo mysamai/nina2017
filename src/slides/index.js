@@ -3,7 +3,6 @@ import * as slides from './slides';
 
 const slideOrder = [
   'splash',
-  'about',
   'link',
   'iceland',
   'speechRecognition',
@@ -105,10 +104,6 @@ export default function (sam) {
 
     currentSlide = slideOrder.indexOf(slide);
     sam.activeRecognizer = sam.recognizer;
-
-    if(slide === 'splash') {
-      content.className += ' home';
-    }
 
     const teardown = sam.render(<div className={`slide ${slide}`}>
       <Slide {... { sam, classification, setRecognizer }} />
