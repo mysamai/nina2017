@@ -6,11 +6,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server",
-    "clean": "node_modules.bin/shx rm -rf dist/ && node_modules.bin/shx mkdir -p dist",
-    "styles": "node_modules.bin/lessc styles/styles.less > dist/styles.css",
+    "clean": "node_modules/.bin/shx rm -rf dist/ && node_modules.bin/shx mkdir -p dist",
+    "styles": "node_modules/.bin/lessc styles/styles.less > dist/styles.css",
     "build": "npm run clean && npm run styles && npm run webpack",
     "build:production": "NODE_ENV=production npm run webpack",
-    "webpack": "webpack"
+    "webpack": "node_modules/.bin/webpack"
   },
   "repository": {
     "type": "git",
